@@ -1,0 +1,4 @@
+configuration-as-code:latest
+configuration-as-code-support:latest
+ldap:latest
+git:latest

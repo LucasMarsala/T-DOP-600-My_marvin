@@ -4,10 +4,15 @@ services:
     build: .
     container_name: jenkins
     restart: always
+    environment:
+      - CASC_JENKINS_CONFIG=/var/jenkins_home/casc_configs/my_marvin.yml
     volumes:
       - jenkins_home:/var/jenkins_home
     ports:
       - "8080:8080"
+      - "5000:5000"
+  ssh-agent:
+    image: jenkins/ssh-agent
 
 volumes:
   jenkins_home:
