@@ -1,3 +1,4 @@
-import jenkins.model.*
-
-Jenkins.instance.setNumExecutors(5)
+folder('Tools') {
+    displayName('Tools')
+    description('Folder for miscellaneous tools.')
+}

@@ -10,7 +10,7 @@ Workdir /Marvin
 
 COPY --chown=jenkins:jenkins /plugins/plugins.txt /usr/share/jenkins/ref/plugins.txt
 
-#COPY --chown=jenkins:jenkins /jobs/job_dsl.groovy /usr/share/jenkins/ref/init.groovy.d/lob_dsl.groovy
+COPY --chown=jenkins:jenkins /jobs/job_dsl.groovy /usr/share/jenkins/ref/init.groovy.d/job_dsl.groovy
 
 COPY --chown=jenkins:jenkins /configuration/my_marvin.yml /var/jenkins_home/casc_configs/my_marvin.yml
 
