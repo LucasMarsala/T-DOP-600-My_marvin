@@ -11,8 +11,5 @@ services:
     ports:
       - "8080:8080"
       - "5000:5000"
-  ssh-agent:
-    image: jenkins/ssh-agent
-
 volumes:
   jenkins_home:

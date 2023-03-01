@@ -1,5 +1,6 @@
 jenkins:
   systemMessage: "Welcome to the Chocolatine-Powered Marvin Jenkins Instance."
+  numExecutors: 0
   securityRealm:
     local:
       allowsSignup: false
@@ -15,10 +16,13 @@ jenkins:
           password: admin
         - id: "i_dont_know"
           name: "Jeremy"
-          password: ${USER_I_DONT_KNOW_PASSWORD}
+          password: admin
         - id: "nasso"
           name: "Nassim"
-          password: ${USER_NASSO_PASSWORD}
+          password: admin
+  projectNamingStrategy:
+    roleBased:
+      forceExistingJobs: false
   authorizationStrategy:
     roleBased:
       roles:
@@ -30,17 +34,11 @@ jenkins:
             assignments:
               - "chocolateen"
               - "admin"
-          - name: "ape"
-            description: "Pedagogical team member"
-            permissions:
-              - "Job/Build"
-              - "Job/Workspaces"
-            assignments:
-              - "i_dont_know"
           - name: "gorilla"
             description: "Group Obsessively Researching Innovation Linked to Learning and Accomplishment"
             permissions:
-              - "ape"
+              - "Job/Build"
+              - "Job/Workspace"
               - "Job/Create"
               - "Job/Configure"
               - "Job/Delete"
@@ -48,45 +46,25 @@ jenkins:
               - "Job/Cancel"
             assignments:
               - "vaugie_g"
+          - name: "ape"
+            description: "Pedagogical team member"
+            permissions:
+              - "Job/Build"
+              - "Job/Workspace"
+            assignments:
+              - "i_dont_know"
           - name: "assist"
             description: "Assistant"
             permissions:
               - "Job/Read"
-              - "Job/Workspaces"
+              - "Job/Workspace"
             assignments:
               - "nasso"
-  nodes:
-    - permanent:
-        name: "static-agent"
-        remoteFS: "/home/jenkins"
-        launcher:
-          jnlp:
-            workDirSettings:
-              disabled: true
-              failIfWorkDirIsMissing: false
-              internalDir: "remoting"
-              workDirPath: "/tmp"
-
-  slaveAgentPort: 50000
-  agentProtocols:
-    - "jnlp2"
-
 tool:
   git:
     installations:
       - name: git
         home: /usr/local/bin/git
 
-credentials:
-  system:
-    domainCredentials:
-      - credentials:
-          - basicSSHUserPrivateKey:
-              scope: SYSTEM
-              id: ssh_with_passphrase_provided
-              username: ssh_root
-              passphrase: ${SSH_KEY_PASSWORD}
-              description: "SSH passphrase with private key file. Private key provided"
-              privateKeySource:
-                directEntry:
-                  privateKey: ${SSH_PRIVATE_KEY}
+jobs:
+  - file: /Marvin/job_dsl.groovy
