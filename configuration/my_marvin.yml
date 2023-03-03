@@ -13,13 +13,13 @@ jenkins:
           password: admin
         - id: "vaugie_g"
           name: "Garance"
-          password: admin
+          password: ${USER_VAUGIE_G_PASSWORD}
         - id: "i_dont_know"
           name: "Jeremy"
-          password: admin
+          password: ${USER_I_DONT_KNOW_PASSWORD}
         - id: "nasso"
           name: "Nassim"
-          password: admin
+          password: ${USER_NASSO_PASSWORD}
   projectNamingStrategy:
     roleBased:
       forceExistingJobs: false
