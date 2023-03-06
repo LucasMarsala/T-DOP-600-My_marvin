@@ -6,28 +6,41 @@ folder('Tools') {
 }
 
 freeStyleJob('Tools/clone-repository') {
-    description("Git URL of the repository to clone")
-    environmentVariables {
-      envs(URL: 'https://github.com/LucasMarsala/T-DOP-600-My_marvin.git', description: 'Git URL of the repository to clone')
+    parameters {
+      stringParam('GIT_REPOSITORY_URL', '', 'Git URL of the repository to clone')
     }
     wrappers {
         preBuildCleanup {
         }
     }
     steps {
-      shell('git clone $URL')
+      shell('git clone $GIT_REPOSITORY_URL')
     }
 }
 
 freeStyleJob('Tools/SEED') {
+    parameters {
+      stringParam('GITHUB_NAME', '', 'GitHub repository owner/repo_name (e.g.: "EpitechIT31000/chocolatine")')
+      stringParam('DISPLAY_NAME', '', 'Display name for the job')
+    }
+}
+
+freeStyleJob('childJob') {
+    displayName("daz")
+    triggers {
+        scm('* * * * *')
+    }
+    scm {
+        github("LucasMarsala/T-DOP-600-My_marvin.git")
+    }
     wrappers {
         preBuildCleanup { // Clean before build
         }
     }
     steps {
-          shell('make fclean')
-          shell('make')
-          shell('make tests run')
-          shell('make clean')
+            shell('make fclean')
+            shell('make')
+            shell('make tests run')
+            shell('make clean')
     }
 }
