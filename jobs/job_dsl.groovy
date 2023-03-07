@@ -10,37 +10,25 @@ freeStyleJob('Tools/clone-repository') {
       stringParam('GIT_REPOSITORY_URL', '', 'Git URL of the repository to clone')
     }
     wrappers {
-        preBuildCleanup {
-        }
+        preBuildCleanup()
     }
     steps {
       shell('git clone $GIT_REPOSITORY_URL')
     }
 }
 
-freeStyleJob('Tools/SEED') {
+Job('test') {
+  steps {
+    shell('echo "bite"')
+  }
+}
+
+Job('Tools/SEED') {
     parameters {
       stringParam('GITHUB_NAME', '', 'GitHub repository owner/repo_name (e.g.: "EpitechIT31000/chocolatine")')
       stringParam('DISPLAY_NAME', '', 'Display name for the job')
     }
-}
-
-freeStyleJob('childJob') {
-    displayName("daz")
-    triggers {
-        scm('* * * * *')
-    }
-    scm {
-        github("LucasMarsala/T-DOP-600-My_marvin.git")
-    }
-    wrappers {
-        preBuildCleanup { // Clean before build
-        }
-    }
     steps {
-            shell('make fclean')
-            shell('make')
-            shell('make tests run')
-            shell('make clean')
+      build job: 'test'
     }
 }

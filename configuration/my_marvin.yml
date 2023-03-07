@@ -60,13 +60,12 @@ jenkins:
               - "Job/Workspace"
             assignments:
               - "nasso"
+
 tool:
   git:
     installations:
       - name: git
-        home: /usr/local/bin/git
+        home: /usr/bin/git
 
 jobs:
   - file: /Marvin/job_dsl.groovy
-
-# https://github.com/LucasMarsala/T-DOP-600-My_marvin.git
