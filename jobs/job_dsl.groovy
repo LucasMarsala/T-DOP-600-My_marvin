@@ -17,18 +17,14 @@ freeStyleJob('Tools/clone-repository') {
     }
 }
 
-Job('test') {
-  steps {
-    shell('echo "bite"')
-  }
-}
-
-Job('Tools/SEED') {
+freeStyleJob('Tools/SEED') {
     parameters {
       stringParam('GITHUB_NAME', '', 'GitHub repository owner/repo_name (e.g.: "EpitechIT31000/chocolatine")')
       stringParam('DISPLAY_NAME', '', 'Display name for the job')
     }
     steps {
-      build job: 'test'
+      dsl {
+        text('freeStyleJob("$DISPLAY_NAME") {triggers {scm("* * * * *")}\n scm{ github("$GITHUB_NAME")\n wrappers{ preBuildCleanup()}}}')
+      }
     }
 }
