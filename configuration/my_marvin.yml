@@ -1,6 +1,5 @@
 jenkins:
   systemMessage: "Welcome to the Chocolatine-Powered Marvin Jenkins Instance."
-  numExecutors: 0
   securityRealm:
     local:
       allowsSignup: false
@@ -60,7 +59,6 @@ jenkins:
               - "Job/Workspace"
             assignments:
               - "nasso"
-
 tool:
   git:
     installations:

@@ -8,6 +8,3 @@ script-security:latest
 structs:latest
 role-strategy:latest
 ws-cleanup:latest
-ldap:latest
-git:latest
-envinject:latest
