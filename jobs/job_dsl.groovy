@@ -1,5 +1,4 @@
 folder('Tools') {
-    displayName('Tools')
     description('Folder for miscellaneous tools.')
 }
 
@@ -22,7 +21,17 @@ freeStyleJob('Tools/SEED') {
     }
     steps {
       dsl {
-        text('freeStyleJob("$DISPLAY_NAME") {triggers {scm("* * * * *")}\n scm{ github("$GITHUB_NAME")\n wrappers{ preBuildCleanup()}}}')
+        text('''
+              freeStyleJob("$DISPLAY_NAME") {
+                triggers {
+                  scm("* * * * *")}
+                  scm {
+                    github("$GITHUB_NAME")
+                    wrappers{ preBuildCleanup()
+                    }
+                  }
+              }
+              ''')
       }
     }
 }
