@@ -36,6 +36,7 @@ jenkins:
           - name: "gorilla"
             description: "Group Obsessively Researching Innovation Linked to Learning and Accomplishment"
             permissions:
+	      - "Overall/Read"
               - "Job/Build"
               - "Job/Workspace"
               - "Job/Create"
@@ -48,6 +49,7 @@ jenkins:
           - name: "ape"
             description: "Pedagogical team member"
             permissions:
+	      - "Overall/Read"
               - "Job/Build"
               - "Job/Workspace"
             assignments:
@@ -55,6 +57,7 @@ jenkins:
           - name: "assist"
             description: "Assistant"
             permissions:
+	      - "Overall/Read"
               - "Job/Read"
               - "Job/Workspace"
             assignments:
